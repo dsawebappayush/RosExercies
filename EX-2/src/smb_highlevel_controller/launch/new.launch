@@ -1,0 +1,29 @@
+<launch>
+	<node name="rviz" pkg="rviz" type="rviz"/>
+	
+	<node
+		name="smb_highlevel_controller"
+		pkg="smb_highlevel_controller"
+		type="smb_highlevel_controller"
+		output="screen">
+		
+		<rosparam
+			command="load"
+			file="$(find smb_highlevel_controller)/config/scan_params.yaml"/>
+		
+	</node>
+	
+	<include file="$(find smb_gazebo)/launch/smb_gazebo.launch">
+		<arg name="world" value="big_map_summer_school"/>
+		<arg name="laser_enabled" value="true"/>
+	</include>
+	
+	<node
+		name="control"
+		pkg="teleop_twist_keyboard"
+		type="teleop_twist_keyboard.py"
+		output="screen"/>
+	<arg name="topic_name" default="/test_topic" />
+    <arg name="message" default="Hello there!" />
+    <node pkg="rostopic" type="rostopic" name="rostopic_pub_node" output="screen" args="pub $(arg topic_name) std_msgs/String 'data: $(arg message)'" />
+</launch>

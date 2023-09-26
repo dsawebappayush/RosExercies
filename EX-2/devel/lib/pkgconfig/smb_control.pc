@@ -1,0 +1,8 @@
+prefix=/home/ayush/ex-2_try2/devel
+
+Name: smb_control
+Description: Description of smb_control
+Version: 0.0.1
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

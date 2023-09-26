@@ -1,0 +1,2 @@
+smb_common/smb_control:smb_common/smb_description:smb_common/smb_gazebo:smb_highlevel_controller
+-DCATKIN_DEVEL_PREFIX=/home/ayush/ex-2_try2/devel -DCMAKE_INSTALL_PREFIX=/home/ayush/ex-2_try2/install -G Unix Makefiles

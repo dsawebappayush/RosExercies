@@ -1,0 +1,28 @@
+<launch>
+	<node name="rviz" pkg="rviz" type="rviz"/>
+	
+	<node
+		name="smb_highlevel_controller"
+		pkg="smb_highlevel_controller"
+		type="smb_highlevel_controller"
+		output="screen">
+		
+		<rosparam
+			command="load"
+			file="$(find smb_highlevel_controller)/config/scan_params.yaml"/>
+		
+	</node>
+	 <arg name="laser_scan_min_height" default="-0.2" />
+        <arg name="laser_scan_max_height" default="1.0" />
+	
+	<include file="$(find smb_gazebo)/launch/smb_gazebo.launch">
+		<arg name="world" value="singlePillar"/>
+		<arg name="laser_enabled" value="true"/>
+		 <arg name="laser_scan_min_height" value="$(arg laser_scan_min_height)" />
+               <arg name="laser_scan_max_height" value="$(arg laser_scan_max_height)" />
+	</include>
+
+	<arg name="topic_name" default="/test_topic" />
+    <arg name="message" default="Hello there!" />
+    <node pkg="rostopic" type="rostopic" name="rostopic_pub_node" output="screen" args="pub $(arg topic_name) std_msgs/String 'data: $(arg message)'" />
+</launch>
